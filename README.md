@@ -16,5 +16,6 @@ You can switch the dataset to use from cora/citeseer/pubmed.
 
 # References
 [1] Thomas N. Kipf and Max Welling. "Variational Graph Auto-Encoders." NIPS. 2016.
-[2] github.com/DaehanKim/vgae_pytpoch
+
+[2] github.com/DaehanKim/vgae_pytorch
 
