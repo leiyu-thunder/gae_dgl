@@ -11,13 +11,7 @@ import scipy.sparse as sp
 import networkx as nx
 import torch
 import numpy as np
-from torch.nn.functional import binary_cross_entropy, binary_cross_entropy_with_logits
 from sklearn.metrics import roc_auc_score, average_precision_score
-from fastprogress.fastprogress import master_bar, progress_bar
-import warnings
-warnings.filterwarnings('ignore')
-
-from .model import GAE, GAEN
 
 # Cell
 def load_data(dataset):
