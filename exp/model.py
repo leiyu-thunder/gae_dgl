@@ -23,22 +23,12 @@ class GCN(nn.Module):
 
     def forward(self, g, feature):
         with g.local_scope():
-            degs = g.out_degrees().to(feature.device).float().clamp(min=1)
-            norm = torch.pow(degs, -0.5)
-            shp = norm.shape + (1,) * (feature.dim() - 1)
-            norm = torch.reshape(norm, shp)
-            feature = feature * norm
-
+            feature = feature * g.ndata['norm']
             g.ndata['h'] = feature
             g.update_all(gcn_msg, gcn_reduce)
             h = g.ndata['h']
             h = self.linear(h)
-
-            degs = g.in_degrees().to(feature.device).float().clamp(min=1)
-            norm = torch.pow(degs, -0.5)
-            shp = norm.shape + (1,) * (feature.dim() - 1)
-            norm = torch.reshape(norm, shp)
-            h = h * norm
+            h = h * g.ndata['norm']
             return self.activation(h)
 
 # Cell
